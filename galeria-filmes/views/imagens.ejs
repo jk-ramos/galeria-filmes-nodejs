@@ -1,0 +1,46 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<div class="container-fluid py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center bg-dark text-warning">
+            <h1 class="font-weight-bold">Galeria de Filmes</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <% imagens.forEach(imagens => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="uploads/<%= imagens.file %>" alt="Erro" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 1.1rem; color: #fff;"><%= imagens.titulo %></h5>
+                                <p class="card-text" style="font-size: 0.9rem; color: #fff;">Ano de Lançamento: <%= imagens.ano %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <hr class="my-4 bg-warning" style="height: 2px; width: 40%; margin: 0 auto;">
+            <h4 class="text-center mb-4 text-warning">Adicionar um Novo Filme</h4>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titulo" class="text-warning">Título do Filme:</label>
+                    <input type="text" name="titulo" id="titulo" placeholder="Insira o título do filme" class="form-control bg-dark text-light" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="ano" class="text-warning">Ano do Filme:</label>
+                    <input type="number" name="ano" id="ano" placeholder="Insira o ano do filme" class="form-control bg-dark text-light" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="file" class="text-warning">Selecione a imagem:</label>
+                    <input type="file" name="file" id="file" class="form-control bg-dark text-light" required>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Enviar" class="btn btn-warning w-100 text-white">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/footer.ejs') %>
